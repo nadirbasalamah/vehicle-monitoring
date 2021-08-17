@@ -16,6 +16,11 @@
     <div class="container">
         <h1>Monitoring Data Kendaraan</h1>
         <h2>Daftar Pemesanan Kendaraan</h2>
+        <a href="{{ route('admin_index') }}" class="btn btn-primary">Kembali ke Dashboard</a>
+        <form action="{{ route('exportToExcel') }}" method="post">
+            @csrf
+            <button type="submit" class="btn btn-success">Ekspor ke File Excel</button>
+        </form>
         <div class="container">
             <table class="table table-hover">
                 <thead>
@@ -40,7 +45,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="{{ route('admin_index') }}" class="btn btn-primary">Kembali ke Dashboard</a>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>

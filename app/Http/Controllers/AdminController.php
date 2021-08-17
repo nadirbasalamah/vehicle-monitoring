@@ -7,6 +7,7 @@ use App\Models\Pool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -37,8 +38,8 @@ class AdminController extends Controller
         $pools = DB::table('pools')
             ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
             ->select('vehicles.*', 'pools.status')
-            ->where('pools.status', 'LIKE', "%" . "setuju" . "%")
-            ->orderBy('pools.id', 'DESC')
+            ->where('pools.status', 'LIKE', "%" . "disetujui" . "%")
+            ->orderBy('pools.id', 'ASC')
             ->get();
 
         return view('admin/monitoring', [
@@ -52,10 +53,34 @@ class AdminController extends Controller
             ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
             ->select('vehicles.*', 'pools.status')
             ->where('pools.status', 'LIKE', "%" . "setuju" . "%")
-            ->orderBy('pools.id', 'DESC')
-            ->get();
+            ->orderBy('pools.id', 'ASC')
+            ->get()
+            ->toArray();
 
         //TODO: export data to excel
+        $pools_array[] = array(
+            'Nama Kendaraan', 'Jenis Kendaraan', 'Konsumsi BBM (Liter)',
+            'Tanggal Service', 'Nama Driver', 'Awal Penggunaan', 'Akhir Penggunaan'
+        );
+        foreach ($pools as $pool) {
+            $pools_array[] = array(
+                'Nama Kendaraan'  => $pool->name,
+                'Jenis Kendaraan'   => $pool->vehicle_type,
+                'Konsumsi BBM (Liter)'    => $pool->fuel_consumption,
+                'Tanggal Service'  => $pool->service_schedule,
+                'Nama Driver'   => $pool->driver,
+                'Awal Penggunaan' => $pool->start_date,
+                'Akhir Penggunaan' => $pool->finish_date,
+            );
+        }
+        // Excel::create('Vehicle Data', function ($excel) use ($pools_array) {
+        //     $excel->setTitle('Vehicle Data');
+        //     $excel->sheet('Vehicle Data', function ($sheet) use ($pools_array) {
+        //         $sheet->fromArray($pools_array, null, 'A1', false, false);
+        //     });
+        // })->download('xlsx');
+
+        // return Excel::download($pools_array, 'Vehicle Data.xlsx');
     }
 
     public function listPool()
@@ -63,7 +88,7 @@ class AdminController extends Controller
         $pools = DB::table('pools')
             ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
             ->select('vehicles.*', 'pools.status')
-            ->orderBy('pools.id', 'DESC')
+            ->orderBy('pools.id', 'ASC')
             ->get();
         return view('admin/pools', ['pools' => $pools]);
     }

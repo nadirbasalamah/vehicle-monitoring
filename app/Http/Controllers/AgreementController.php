@@ -18,7 +18,7 @@ class AgreementController extends Controller
         $pools = DB::table('pools')
             ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
             ->select('vehicles.*', 'pools.status')
-            ->orderBy('pools.id', 'DESC')
+            ->orderBy('pools.id', 'ASC')
             ->get();
 
         return view('agreement/pools', ['pools' => $pools]);
@@ -30,7 +30,7 @@ class AgreementController extends Controller
             ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
             ->select('vehicles.*', 'pools.status')
             ->where('pools.id', '=', $id)
-            ->orderBy('pools.id', 'DESC')
+            ->orderBy('pools.id', 'ASC')
             ->get();
 
         return view('agreement/view_pool', ['pool' => $pool]);
