@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PoolsExport;
 use App\Models\Vehicle;
 use App\Models\Pool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
+use Excel;
 
 class AdminController extends Controller
 {
@@ -49,38 +50,7 @@ class AdminController extends Controller
 
     public function exportToExcel()
     {
-        $pools = DB::table('pools')
-            ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
-            ->select('vehicles.*', 'pools.status')
-            ->where('pools.status', 'LIKE', "%" . "setuju" . "%")
-            ->orderBy('pools.id', 'ASC')
-            ->get()
-            ->toArray();
-
-        //TODO: export data to excel
-        $pools_array[] = array(
-            'Nama Kendaraan', 'Jenis Kendaraan', 'Konsumsi BBM (Liter)',
-            'Tanggal Service', 'Nama Driver', 'Awal Penggunaan', 'Akhir Penggunaan'
-        );
-        foreach ($pools as $pool) {
-            $pools_array[] = array(
-                'Nama Kendaraan'  => $pool->name,
-                'Jenis Kendaraan'   => $pool->vehicle_type,
-                'Konsumsi BBM (Liter)'    => $pool->fuel_consumption,
-                'Tanggal Service'  => $pool->service_schedule,
-                'Nama Driver'   => $pool->driver,
-                'Awal Penggunaan' => $pool->start_date,
-                'Akhir Penggunaan' => $pool->finish_date,
-            );
-        }
-        // Excel::create('Vehicle Data', function ($excel) use ($pools_array) {
-        //     $excel->setTitle('Vehicle Data');
-        //     $excel->sheet('Vehicle Data', function ($sheet) use ($pools_array) {
-        //         $sheet->fromArray($pools_array, null, 'A1', false, false);
-        //     });
-        // })->download('xlsx');
-
-        // return Excel::download($pools_array, 'Vehicle Data.xlsx');
+        return Excel::download(new PoolsExport, 'VehicleData.xlsx');
     }
 
     public function listPool()
@@ -106,7 +76,7 @@ class AdminController extends Controller
             'finish_date'
         ]);
 
-        $validator = Validator::make($data, [
+        Validator::make($data, [
             'name' => 'required',
             'vehicle_type' => 'required',
             'fuel_consumption' => 'required',
@@ -140,6 +110,28 @@ class AdminController extends Controller
 
     public function updateVehicle(Request $request, $id)
     {
+        $data = $request->only([
+            'name',
+            'vehicle_type',
+            'fuel_consumption',
+            'service_schedule',
+            'driver',
+            'agreement',
+            'start_date',
+            'finish_date'
+        ]);
+
+        Validator::make($data, [
+            'name' => 'required',
+            'vehicle_type' => 'required',
+            'fuel_consumption' => 'required',
+            'service_schedule' => 'required',
+            'driver' => 'required',
+            'agreement' => 'required',
+            'start_date' => 'required',
+            'finish_date' => 'required',
+        ]);
+
         $vehicle = Vehicle::find($id);
 
         $vehicle->name = $request->get('name');

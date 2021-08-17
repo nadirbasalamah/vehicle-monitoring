@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <h1>Monitoring Data Kendaraan</h1>
-        <h2>Daftar Pemesanan Kendaraan</h2>
+        <h2>Daftar Penggunaan Kendaraan</h2>
         <a href="{{ route('admin_index') }}" class="btn btn-primary">Kembali ke Dashboard</a>
         <form action="{{ route('exportToExcel') }}" method="post">
             @csrf
@@ -27,6 +27,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nama Kendaraan</th>
+                        <th scope="col">Penggunaan BBM (Liter)</th>
                         <th scope="col">Penggunaan Awal</th>
                         <th scope="col">Penggunaan Akhir</th>
                         <th scope="col">Status</th>
@@ -37,6 +38,7 @@
                     <tr>
                         <th scope="row">{{$pool->id}}</th>
                         <td>{{$pool->name}}</td>
+                        <td>{{$pool->fuel_consumption}}</td>
                         <td>{{$pool->start_date}}</td>
                         <td>{{$pool->finish_date}}</td>
                         <td>{{$pool->status}}</td>
