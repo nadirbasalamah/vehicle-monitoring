@@ -23,6 +23,7 @@
         <p>Nama Driver: {{ $v->driver }}</p>
         <p>Tanggal Mulai Penggunaan: {{ $v->start_date }}</p>
         <p>Tanggal Selesai Penggunaan: {{ $v->finish_date }}</p>
+        <a href="{{route('update', ['id' => $v->id])}}" class="btn btn-warning">Ubah</a>
         @endforeach
         <a href="{{ route('listVehicle') }}" class="btn btn-primary">Kembali ke Daftar Kendaraan</a>
     </div>

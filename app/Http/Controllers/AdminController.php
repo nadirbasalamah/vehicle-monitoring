@@ -132,16 +132,29 @@ class AdminController extends Controller
         return redirect()->route('listVehicle');
     }
 
-    public function updateVehicle(Request $request)
+    public function update($id)
     {
-        # OPTIONAL
+        $vehicle = Vehicle::where('id', $id)->get();
+        return view('admin/edit_vehicle', ['vehicle' => $vehicle]);
     }
 
-    public function deleteVehicle(Request $request)
+    public function updateVehicle(Request $request, $id)
     {
-        # OPTIONAL
-    }
+        $vehicle = Vehicle::find($id);
 
+        $vehicle->name = $request->get('name');
+        $vehicle->vehicle_type = $request->get('vehicle_type');
+        $vehicle->fuel_consumption = $request->get('fuel_consumption');
+        $vehicle->service_schedule = $request->get('service_schedule');
+        $vehicle->driver = $request->get('driver');
+        $vehicle->agreement = $request->get('agreement');
+        $vehicle->start_date = $request->get('start_date');
+        $vehicle->finish_date = $request->get('finish_date');
+
+        $vehicle->save();
+
+        return redirect()->route('listVehicle');
+    }
     public function addToPool($id)
     {
         $pool = new Pool();

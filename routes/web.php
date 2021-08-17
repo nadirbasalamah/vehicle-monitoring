@@ -27,14 +27,13 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/admin', [AdminController::class, 'index'])->name('admin_index');
 Route::get('/vehicles', [AdminController::class, 'listVehicle'])->name('listVehicle');
 Route::get('/vehicles/{id}', [AdminController::class, 'vehicleDetail'])->name('vehicleDetail');
+Route::get('/vehicle/edit/{id}', [AdminController::class, 'update'])->name('update');
 Route::get('/add', [AdminController::class, 'addVehicle'])->name('addVehicle');
 Route::get('/monitoring', [AdminController::class, 'monitoringData'])->name('monitoringData');
 Route::get('/admin/pools', [AdminController::class, 'listPool'])->name('listPool');
-Route::post('/add', [AdminController::class, 'addNewVehicle'])->name('addNewVehicle');
 
-// update and delete is optional
+Route::post('/add', [AdminController::class, 'addNewVehicle'])->name('addNewVehicle');
 Route::post('/update/{id}', [AdminController::class, 'updateVehicle'])->name('updateVehicle');
-Route::post('/delete/{id}', [AdminController::class, 'deleteVehicle'])->name('deleteVehicle');
 
 Route::post('/pool/{id}', [AdminController::class, 'addToPool'])->name('addToPool');
 Route::post('/export', [AdminController::class, 'exportToExcel'])->name('exportToExcel');

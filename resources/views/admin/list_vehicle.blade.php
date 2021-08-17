@@ -35,13 +35,15 @@
                         <td>{{$vehicle->name}}</td>
                         <td>{{$vehicle->start_date}}</td>
                         <td>{{$vehicle->finish_date}}</td>
-                        <td><a href="{{route('vehicleDetail', ['id' => $vehicle->id])}}" class="btn btn-primary">Lihat</a></td>
                         <td>
+                            <a href="{{route('vehicleDetail', ['id' => $vehicle->id])}}" class="btn btn-primary">Lihat</a>
                             <form action="{{route('addToPool', ['id' => $vehicle->id])}}" method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-info">Tambahkan ke Pool</button>
                             </form>
+                            <a href="{{route('update', ['id' => $vehicle->id])}}" class="btn btn-warning">Ubah</a>
                         </td>
+
                     </tr>
                     @endforeach
                 </tbody>

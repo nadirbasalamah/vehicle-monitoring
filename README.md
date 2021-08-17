@@ -1,5 +1,17 @@
 ## Vehicle Monitoring Application
 
+Web Application for vehicle usage monitoring for company.
+
+## Diagrams
+
+### Activity Diagram
+
+<img src="./docs/vehicle_monitoring_activity_diagram.png">
+
+### Physical Data Model
+
+<img src="./docs/vehicle_monitoring_pdm.png">
+
 ## User
 
 -   Admin
