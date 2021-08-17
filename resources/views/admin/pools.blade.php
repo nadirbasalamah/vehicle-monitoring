@@ -30,7 +30,7 @@
                 <tbody>
                     @foreach($pools as $pool)
                     <tr>
-                        <th scope="row">{{$pool->id}}</th>
+                        <th scope="row">{{$pool->pool_id}}</th>
                         <td>{{$pool->name}}</td>
                         <td>{{$pool->start_date}}</td>
                         <td>{{$pool->finish_date}}</td>

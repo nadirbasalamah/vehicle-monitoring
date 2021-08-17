@@ -57,7 +57,7 @@ class AdminController extends Controller
     {
         $pools = DB::table('pools')
             ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
-            ->select('vehicles.*', 'pools.status')
+            ->select('vehicles.*', 'pools.id AS pool_id', 'pools.status')
             ->orderBy('pools.id', 'ASC')
             ->get();
         return view('admin/pools', ['pools' => $pools]);

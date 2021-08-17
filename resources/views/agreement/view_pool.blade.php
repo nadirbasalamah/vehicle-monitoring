@@ -26,7 +26,7 @@
         <p>Status: {{ $p->status }}</p>
         <br />
         <h3>Pilihan</h3>
-        <form action="{{ route('verifyVehicle', ['id' => $p->id]) }}" method="post">
+        <form action="{{ route('verifyVehicle', ['id' => $p->pool_id]) }}" method="post">
             @csrf
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="status" id="agree" checked value="agree">

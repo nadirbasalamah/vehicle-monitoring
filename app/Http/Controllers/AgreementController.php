@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pool;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AgreementController extends Controller
@@ -17,7 +18,7 @@ class AgreementController extends Controller
     {
         $pools = DB::table('pools')
             ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
-            ->select('vehicles.*', 'pools.status')
+            ->select('vehicles.*', 'pools.id AS pool_id', 'pools.status')
             ->orderBy('pools.id', 'ASC')
             ->get();
 
@@ -28,7 +29,7 @@ class AgreementController extends Controller
     {
         $pool = DB::table('pools')
             ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
-            ->select('vehicles.*', 'pools.status')
+            ->select('vehicles.*', 'pools.id AS pool_id', 'pools.status')
             ->where('pools.id', '=', $id)
             ->orderBy('pools.id', 'ASC')
             ->get();
@@ -38,15 +39,14 @@ class AgreementController extends Controller
 
     public function verifyVehicle(Request $request, $id)
     {
-        //TODO: implement verifyVehicle with actual user
         $pool = Pool::find($id);
 
         $status = '';
 
         if ($request->get('status') == 'agree') {
-            $status = "Disetujui oleh penyetuju";
+            $status = "Disetujui oleh " . Auth::user()->name;
         } else {
-            $status = "Ditolak oleh penyetuju";
+            $status = "Ditolak oleh " . Auth::user()->name;
         }
 
         $notes = $request->get('notes');

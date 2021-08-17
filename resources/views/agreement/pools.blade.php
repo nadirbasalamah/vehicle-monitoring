@@ -31,13 +31,13 @@
                 <tbody>
                     @foreach($pools as $pool)
                     <tr>
-                        <th scope="row">{{$pool->id}}</th>
+                        <th scope="row">{{$pool->pool_id}}</th>
                         <td>{{$pool->name}}</td>
                         <td>{{$pool->start_date}}</td>
                         <td>{{$pool->finish_date}}</td>
                         <td>{{$pool->status}}</td>
                         <td>
-                            <a href="{{route('viewPool', ['id' => $pool->id])}}" class="btn btn-primary">Lihat</a>
+                            <a href="{{route('viewPool', ['id' => $pool->pool_id])}}" class="btn btn-primary">Lihat</a>
                         </td>
                     </tr>
                     @endforeach
