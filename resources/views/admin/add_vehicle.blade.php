@@ -38,8 +38,8 @@
                 <input type="text" class="form-control" id="driver" name="driver" required>
             </div>
             <div class="mb-3">
-                <label for="driver" class="form-label">Nama Pihak Persetujuan</label>
-                <input type="text" class="form-control" id="driver" name="agreement" required>
+                <label for="agreement" class="form-label">Nama Pihak Persetujuan</label>
+                <input type="text" class="form-control" id="agreement" name="agreement" required>
             </div>
             <div class="mb-3">
                 <label for="start_schedule" class="form-label">Awal Penggunaan</label>

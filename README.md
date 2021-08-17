@@ -44,13 +44,20 @@ CREATE DATABASE vehicle_monitoring;
 ```
 
 3. Lakukan konfigurasi koneksi database pada file `.env`, contoh konfigurasi dapat dilihat pada file `.env.example`.
-4. Lakukan migrasi tabel ke database dengan menggunakan command berikut.
+
+4. Lakukan instalasi berbagai dependensi dengan menggunakan command berikut.
+
+```
+composer install
+```
+
+5. Lakukan migrasi tabel ke database dengan menggunakan command berikut.
 
 ```
 php artisan migrate
 ```
 
-5. Lakukan seeding untuk data user dengan menggunakan command berikut.
+6. Lakukan seeding untuk data user dengan menggunakan command berikut.
 
 ```
 php artisan db:seed --class=UserSeeder

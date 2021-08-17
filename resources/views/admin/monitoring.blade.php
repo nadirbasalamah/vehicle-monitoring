@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
     <title>Vehicle Monitoring</title>
 
@@ -48,8 +51,16 @@
             </table>
         </div>
 
+        <div style="width: 50%">
+            {!! $vehiclesCart->container() !!}
+        </div>
+
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    @if($vehiclesCart)
+    {!! $vehiclesCart->script() !!}
+    @endif
 </body>
 
 </html>

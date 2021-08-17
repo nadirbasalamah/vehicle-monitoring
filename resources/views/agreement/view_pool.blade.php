@@ -14,16 +14,21 @@
 
 <body>
     <div class="container">
-        <h1>Data Pool Kendaraan</h1>
+        <h1>Data Kendaraan</h1>
         @foreach($pool as $p)
-        <p>Nama: {{ $p->name }}</p>
-        <p>Jenis Kendaraan: {{ $p->vehicle_type }}</p>
-        <p>Konsumsi BBM: {{ $p->fuel_consumption }}</p>
-        <p>Jadwal Service: {{ $p->service_schedule }}</p>
-        <p>Nama Driver: {{ $p->driver }}</p>
-        <p>Tanggal Mulai Penggunaan: {{ $p->start_date }}</p>
-        <p>Tanggal Selesai Penggunaan: {{ $p->finish_date }}</p>
-        <p>Status: {{ $p->status }}</p>
+        <div class="card border-primary mb-3" style="width: 32rem;">
+            <div class="card-body">
+                <h5 class="card-title">Rincian Data</h5>
+                <p class="card-text">Nama: {{ $p->name }}</p>
+                <p class="card-text">Jenis Kendaraan: {{ $p->vehicle_type }}</p>
+                <p class="card-text">Konsumsi BBM: {{ $p->fuel_consumption }}</p>
+                <p class="card-text">Jadwal Service: {{ $p->service_schedule }}</p>
+                <p class="card-text">Nama Driver: {{ $p->driver }}</p>
+                <p class="card-text">Tanggal Mulai Penggunaan: {{ $p->start_date }}</p>
+                <p class="card-text">Tanggal Selesai Penggunaan: {{ $p->finish_date }}</p>
+                <p class="card-text">Status: {{ $p->status }}</p>
+            </div>
+        </div>
         <br />
         <h3>Pilihan</h3>
         <form action="{{ route('verifyVehicle', ['id' => $p->pool_id]) }}" method="post">
