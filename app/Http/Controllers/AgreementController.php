@@ -19,6 +19,7 @@ class AgreementController extends Controller
         $pools = DB::table('pools')
             ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
             ->select('vehicles.*', 'pools.id AS pool_id', 'pools.status')
+            ->where('vehicles.agreement', '=', Auth::user()->name)
             ->orderBy('pools.id', 'ASC')
             ->get();
 

@@ -150,8 +150,10 @@ class AdminController extends Controller
     public function addToPool($id)
     {
         $pool = new Pool();
+        $vehicle = Vehicle::where('id', $id)->get();
+
         $pool->vehicle_id = $id;
-        $pool->status = "Menunggu Persetujuan";
+        $pool->status = "Menunggu Persetujuan " . $vehicle[0]->agreement;
 
         $pool->save();
 
