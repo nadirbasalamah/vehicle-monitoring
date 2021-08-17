@@ -36,7 +36,8 @@ Route::post('/add', [AdminController::class, 'addNewVehicle'])->name('addNewVehi
 Route::post('/update/{id}', [AdminController::class, 'updateVehicle'])->name('updateVehicle');
 Route::post('/delete/{id}', [AdminController::class, 'deleteVehicle'])->name('deleteVehicle');
 
-Route::post('/pool', [AdminController::class, 'addToPool'])->name('addToPool');
+Route::post('/pool/{id}', [AdminController::class, 'addToPool'])->name('addToPool');
+Route::post('/export', [AdminController::class, 'exportToExcel'])->name('exportToExcel');
 
 // For Agreement Section
 Route::get('/agreement', [AgreementController::class, 'index'])->name('agreement_index');

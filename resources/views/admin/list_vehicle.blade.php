@@ -13,40 +13,41 @@
 </head>
 
 <body>
-    <h1>Daftar Kendaraan</h1>
-    <a href="{{ route('addVehicle') }}" class="btn btn-primary">Tambah Data Kendaraan</a>
     <div class="container">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
+        <h1>Daftar Kendaraan</h1>
+        <a href="{{ route('admin_index') }}" class="btn btn-primary">Kembali ke Dashboard</a>
+        <a href="{{ route('addVehicle') }}" class="btn btn-primary">Tambah Data Kendaraan</a>
+        <div class="container">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nama Kendaraan</th>
+                        <th scope="col">Penggunaan Awal</th>
+                        <th scope="col">Penggunaan Akhir</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($vehicles as $vehicle)
+                    <tr>
+                        <th scope="row">{{$vehicle->id}}</th>
+                        <td>{{$vehicle->name}}</td>
+                        <td>{{$vehicle->start_date}}</td>
+                        <td>{{$vehicle->finish_date}}</td>
+                        <td><a href="{{route('vehicleDetail', ['id' => $vehicle->id])}}" class="btn btn-primary">Lihat</a></td>
+                        <td>
+                            <form action="{{route('addToPool', ['id' => $vehicle->id])}}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-info">Tambahkan ke Pool</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-    <a href="{{ route('admin_index') }}" class="btn btn-primary">Kembali ke Dashboard</a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 

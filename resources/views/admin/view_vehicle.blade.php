@@ -13,15 +13,19 @@
 </head>
 
 <body>
-    <h1>Data Kendaraan</h1>
-    <p>Nama</p>
-    <p>Jenis Kendaraan</p>
-    <p>Konsumsi BBM</p>
-    <p>Jadwal Service</p>
-    <p>Nama Driver</p>
-    <p>Tanggal Mulai Penggunaan</p>
-    <p>Tanggal Selesai Penggunaan</p>
-    <a href="{{ route('listVehicle') }}" class="btn btn-primary">Kembali ke Daftar Kendaraan</a>
+    <div class="container">
+        <h1>Data Kendaraan</h1>
+        @foreach($vehicle as $v)
+        <p>Nama: {{ $v->name }}</p>
+        <p>Jenis Kendaraan: {{ $v->vehicle_type }}</p>
+        <p>Konsumsi BBM: {{ $v->fuel_consumption }}</p>
+        <p>Jadwal Service: {{ $v->service_schedule }}</p>
+        <p>Nama Driver: {{ $v->driver }}</p>
+        <p>Tanggal Mulai Penggunaan: {{ $v->start_date }}</p>
+        <p>Tanggal Selesai Penggunaan: {{ $v->finish_date }}</p>
+        @endforeach
+        <a href="{{ route('listVehicle') }}" class="btn btn-primary">Kembali ke Daftar Kendaraan</a>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 

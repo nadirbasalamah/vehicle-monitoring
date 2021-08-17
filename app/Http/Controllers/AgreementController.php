@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pool;
+use Illuminate\Support\Facades\DB;
 
 class AgreementController extends Controller
 {
@@ -13,16 +15,46 @@ class AgreementController extends Controller
 
     public function pools()
     {
-        return view('agreement/pools');
+        $pools = DB::table('pools')
+            ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
+            ->select('vehicles.*', 'pools.status')
+            ->orderBy('pools.id', 'DESC')
+            ->get();
+
+        return view('agreement/pools', ['pools' => $pools]);
     }
 
-    public function viewPool()
+    public function viewPool($id)
     {
-        return view('agreement/view_pool');
+        $pool = DB::table('pools')
+            ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
+            ->select('vehicles.*', 'pools.status')
+            ->where('pools.id', '=', $id)
+            ->orderBy('pools.id', 'DESC')
+            ->get();
+
+        return view('agreement/view_pool', ['pool' => $pool]);
     }
 
-    public function verifyVehicle(Request $request)
+    public function verifyVehicle(Request $request, $id)
     {
-        # code...
+        //TODO: implement verifyVehicle with actual user
+        $pool = Pool::find($id);
+
+        $status = '';
+
+        if ($request->get('status') == 'agree') {
+            $status = "Disetujui oleh penyetuju";
+        } else {
+            $status = "Ditolak oleh penyetuju";
+        }
+
+        $notes = $request->get('notes');
+
+        $pool->status = $status . ", " . $notes;
+
+        $pool->save();
+
+        return redirect()->route('pools');
     }
 }
