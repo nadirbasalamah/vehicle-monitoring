@@ -23,6 +23,8 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nama Kendaraan</th>
+                        <th scope="col">Jenis Kendaraan</th>
+                        <th scope="col">Kepemilikan Kendaraan</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -31,15 +33,12 @@
                     <tr>
                         <th scope="row">{{$vehicle->id}}</th>
                         <td>{{$vehicle->name}}</td>
+                        <td>{{$vehicle->vehicle_type}}</td>
+                        <td>{{$vehicle->vehicle_ownership_type}}</td>
                         <td>
                             <a href="{{route('vehicleDetail', ['id' => $vehicle->id])}}" class="btn btn-primary">Lihat</a>
-                            <form action="{{route('addToPool', ['id' => $vehicle->id])}}" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-info">Tambahkan ke Pool</button>
-                            </form>
                             <a href="{{route('update', ['id' => $vehicle->id])}}" class="btn btn-warning">Ubah</a>
                         </td>
-
                     </tr>
                     @endforeach
                 </tbody>
