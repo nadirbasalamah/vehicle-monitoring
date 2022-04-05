@@ -68,10 +68,11 @@ php artisan db:seed --class=UserSeeder
 1. Login dengan menggunakan akun untuk admin.
 2. Pilih menu Lihat daftar kendaraan.
 3. Pilih tambah data kendaraan.
-4. Isi data kendaraan lalu di bagian nama pihak persetujuan, isi dengan `manajer`.
-5. Klik tambah.
-6. Tambahkan data ke dalam pool dengan klik Tambahkan ke pool. Nantinya data kendaraan di pool akan ditentukan oleh pihak persetujuan apakah kendaraan dapat dipakai atau tidak.
-7. Fitur monitoring juga tersedia untuk melihat kendaraan yang telah disetujui untuk digunakan, fitur tersebut dapat diakses pada halaman awal admin pada bagian monitoring data kendaraan.
+4. Isi data kendaraan lalu klik tambah.
+5. Tambahkan data pemesanan baru pada menu daftar pool lalu pilih tambah pemesanan kendaraan.
+6. Lakukan pengisian untuk data pemesanan kendaraan dengan menentukan kendaraan yang akan digunakan, supir beserta pihak yang dipilih untuk menyetujui pemesanan kendaraan.
+7. Jika selesai, klik tambah. Data pemesanan kendaraan nanti akan dilihat oleh pihak penyetuju yang sudah ditentukan di bagian pemesanan.
+8. Fitur monitoring juga tersedia untuk melihat kendaraan yang telah disetujui untuk digunakan, fitur tersebut dapat diakses pada halaman awal admin pada bagian monitoring data kendaraan.
 
 ### Untuk Pihak Penyetuju
 
