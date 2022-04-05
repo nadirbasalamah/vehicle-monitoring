@@ -38,12 +38,14 @@ class AdminController extends Controller
 
     public function monitoringData()
     {
-        $pools = DB::table('pools')
-            ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
-            ->select('vehicles.*', 'pools.status')
-            ->where('pools.status', 'LIKE', "%" . "disetujui" . "%")
-            ->orderBy('pools.id', 'ASC')
-            ->get();
+        // $pools = DB::table('pools')
+        //     ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
+        //     ->select('vehicles.*', 'pools.status')
+        //     ->where('pools.status', 'LIKE', "%" . "disetujui" . "%")
+        //     ->orderBy('pools.id', 'ASC')
+        //     ->get();
+
+        $pools = Pool::with(['vehicle', 'agreement'])->where('status', 'LIKE', "%" . "disetujui" . "%")->get();
 
         $vehiclesCart = new VehicleChart;
 
@@ -76,9 +78,9 @@ class AdminController extends Controller
         $vehicleNames = [];
         $fuelUsages = [];
 
-        foreach ($pools->toArray() as $key => $value) {
-            $vehicleNames[] = $value->name;
-            $fuelUsages[] = $value->fuel_consumption;
+        foreach ($pools as $value) {
+            $vehicleNames[] = $value->vehicle->name;
+            $fuelUsages[] = $value->vehicle->fuel_consumption;
         }
 
         $vehiclesCart->labels($vehicleNames);

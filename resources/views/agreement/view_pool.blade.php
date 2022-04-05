@@ -19,10 +19,10 @@
         <div class="card border-primary mb-3" style="width: 32rem;">
             <div class="card-body">
                 <h5 class="card-title">Rincian Data</h5>
-                <p class="card-text">Nama: {{ $p->name }}</p>
-                <p class="card-text">Jenis Kendaraan: {{ $p->vehicle_type }}</p>
-                <p class="card-text">Konsumsi BBM: {{ $p->fuel_consumption }}</p>
-                <p class="card-text">Jadwal Service: {{ $p->service_schedule }}</p>
+                <p class="card-text">Nama: {{ $p->vehicle->name }}</p>
+                <p class="card-text">Jenis Kendaraan: {{ $p->vehicle->vehicle_type }}</p>
+                <p class="card-text">Konsumsi BBM: {{ $p->vehicle->fuel_consumption }}</p>
+                <p class="card-text">Jadwal Service: {{ $p->vehicle->service_schedule }}</p>
                 <p class="card-text">Nama Driver: {{ $p->driver }}</p>
                 <p class="card-text">Tanggal Mulai Penggunaan: {{ $p->start_date }}</p>
                 <p class="card-text">Tanggal Selesai Penggunaan: {{ $p->finish_date }}</p>
@@ -31,7 +31,7 @@
         </div>
         <br />
         <h3>Pilihan</h3>
-        <form action="{{ route('verifyVehicle', ['id' => $p->pool_id]) }}" method="post">
+        <form action="{{ route('verifyVehicle', ['id' => $p->id]) }}" method="post">
             @csrf
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="status" id="agree" checked value="agree">

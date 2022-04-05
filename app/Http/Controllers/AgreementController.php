@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pool;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AgreementController extends Controller
 {
@@ -16,24 +15,16 @@ class AgreementController extends Controller
 
     public function pools()
     {
-        $pools = DB::table('pools')
-            ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
-            ->select('vehicles.*', 'pools.id AS pool_id', 'pools.status')
-            ->where('vehicles.agreement', '=', Auth::user()->name)
-            ->orderBy('pools.id', 'ASC')
-            ->get();
+        $userId = Auth::id();
+
+        $pools = Pool::with(['vehicle', 'agreement'])->where('agreement_id', $userId)->get();
 
         return view('agreement/pools', ['pools' => $pools]);
     }
 
     public function viewPool($id)
     {
-        $pool = DB::table('pools')
-            ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
-            ->select('vehicles.*', 'pools.id AS pool_id', 'pools.status')
-            ->where('pools.id', '=', $id)
-            ->orderBy('pools.id', 'ASC')
-            ->get();
+        $pool = Pool::with(['vehicle'])->where('id', $id)->get();
 
         return view('agreement/view_pool', ['pool' => $pool]);
     }

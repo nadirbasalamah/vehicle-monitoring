@@ -40,8 +40,8 @@
                     @foreach($pools as $pool)
                     <tr>
                         <th scope="row">{{$pool->id}}</th>
-                        <td>{{$pool->name}}</td>
-                        <td>{{$pool->fuel_consumption}}</td>
+                        <td>{{$pool->vehicle->name}}</td>
+                        <td>{{$pool->vehicle->fuel_consumption}}</td>
                         <td>{{$pool->start_date}}</td>
                         <td>{{$pool->finish_date}}</td>
                         <td>{{$pool->status}}</td>
