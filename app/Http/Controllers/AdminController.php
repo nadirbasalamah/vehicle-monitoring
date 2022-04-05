@@ -6,6 +6,7 @@ use App\Charts\VehicleChart;
 use App\Exports\PoolsExport;
 use App\Models\Vehicle;
 use App\Models\Pool;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -99,11 +100,8 @@ class AdminController extends Controller
 
     public function listPool()
     {
-        $pools = DB::table('pools')
-            ->join('vehicles', 'pools.vehicle_id', 'vehicles.id')
-            ->select('vehicles.*', 'pools.id AS pool_id', 'pools.status')
-            ->orderBy('pools.id', 'ASC')
-            ->get();
+        $pools = Pool::with(['vehicle', 'agreement'])->get();
+
         return view('admin/pools', ['pools' => $pools]);
     }
 
@@ -114,10 +112,7 @@ class AdminController extends Controller
             'vehicle_type',
             'fuel_consumption',
             'service_schedule',
-            'driver',
-            'agreement',
-            'start_date',
-            'finish_date'
+            'vehicle_ownership_type',
         ]);
 
         Validator::make($data, [
@@ -125,10 +120,7 @@ class AdminController extends Controller
             'vehicle_type' => 'required',
             'fuel_consumption' => 'required',
             'service_schedule' => 'required',
-            'driver' => 'required',
-            'agreement' => 'required',
-            'start_date' => 'required',
-            'finish_date' => 'required',
+            'vehicle_ownership_type' => 'required',
         ]);
 
         $vehicle = new Vehicle();
@@ -136,10 +128,7 @@ class AdminController extends Controller
         $vehicle->vehicle_type = $request->get('vehicle_type');
         $vehicle->fuel_consumption = $request->get('fuel_consumption');
         $vehicle->service_schedule = $request->get('service_schedule');
-        $vehicle->driver = $request->get('driver');
-        $vehicle->agreement = $request->get('agreement');
-        $vehicle->start_date = $request->get('start_date');
-        $vehicle->finish_date = $request->get('finish_date');
+        $vehicle->vehicle_ownership_type = $request->get('vehicle_ownership_type');
 
         $vehicle->save();
 
@@ -159,10 +148,7 @@ class AdminController extends Controller
             'vehicle_type',
             'fuel_consumption',
             'service_schedule',
-            'driver',
-            'agreement',
-            'start_date',
-            'finish_date'
+            'vehicle_ownership_type',
         ]);
 
         Validator::make($data, [
@@ -170,10 +156,7 @@ class AdminController extends Controller
             'vehicle_type' => 'required',
             'fuel_consumption' => 'required',
             'service_schedule' => 'required',
-            'driver' => 'required',
-            'agreement' => 'required',
-            'start_date' => 'required',
-            'finish_date' => 'required',
+            'vehicle_ownership_type' => 'required',
         ]);
 
         $vehicle = Vehicle::find($id);
@@ -182,22 +165,47 @@ class AdminController extends Controller
         $vehicle->vehicle_type = $request->get('vehicle_type');
         $vehicle->fuel_consumption = $request->get('fuel_consumption');
         $vehicle->service_schedule = $request->get('service_schedule');
-        $vehicle->driver = $request->get('driver');
-        $vehicle->agreement = $request->get('agreement');
-        $vehicle->start_date = $request->get('start_date');
-        $vehicle->finish_date = $request->get('finish_date');
+        $vehicle->vehicle_ownership_type = $request->get('vehicle_ownership_type');
 
         $vehicle->save();
 
         return redirect()->route('listVehicle');
     }
-    public function addToPool($id)
-    {
-        $pool = new Pool();
-        $vehicle = Vehicle::where('id', $id)->get();
 
-        $pool->vehicle_id = $id;
-        $pool->status = "Menunggu Persetujuan " . $vehicle[0]->agreement;
+    public function addPool()
+    {
+        $vehicles = Vehicle::all();
+        $agreements = User::where('role', 'agreement')->get();
+
+        return view('admin/add_pool', compact('vehicles', 'agreements'));
+    }
+
+    public function createPool(Request $request)
+    {
+        $data = $request->only([
+            'vehicle_id',
+            'driver',
+            'agreement_id',
+            'start_date',
+            'finish_date',
+        ]);
+
+        Validator::make($data, [
+            'vehicle_id' => 'required',
+            'driver' => 'required',
+            'agreement_id' => 'required',
+            'start_date' => 'required',
+            'finish_date' => 'required',
+        ]);
+
+        $pool = new Pool();
+
+        $pool->vehicle_id = $request->get('vehicle_id');
+        $pool->driver = $request->get('driver');
+        $pool->agreement_id = $request->get('agreement_id');
+        $pool->start_date = $request->get('start_date');
+        $pool->finish_date = $request->get('finish_date');
+        $pool->status = 'Menunggu Persetujuan';
 
         $pool->save();
 

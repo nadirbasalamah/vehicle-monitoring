@@ -23,8 +23,6 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nama Kendaraan</th>
-                        <th scope="col">Penggunaan Awal</th>
-                        <th scope="col">Penggunaan Akhir</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -33,8 +31,6 @@
                     <tr>
                         <th scope="row">{{$vehicle->id}}</th>
                         <td>{{$vehicle->name}}</td>
-                        <td>{{$vehicle->start_date}}</td>
-                        <td>{{$vehicle->finish_date}}</td>
                         <td>
                             <a href="{{route('vehicleDetail', ['id' => $vehicle->id])}}" class="btn btn-primary">Lihat</a>
                             <form action="{{route('addToPool', ['id' => $vehicle->id])}}" method="post">

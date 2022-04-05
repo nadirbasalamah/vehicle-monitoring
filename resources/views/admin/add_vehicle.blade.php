@@ -22,8 +22,11 @@
                 <input type="text" class="form-control" id="vehicle_name" name="name" required>
             </div>
             <div class="mb-3">
-                <label for="vehicle_type" class="form-label">Jenis Kendaraan</label>
-                <input type="text" class="form-control" id="vehicle_type" name="vehicle_type" required>
+                <select class="form-select" aria-label="Select vehicle ownership" name="vehicle_type" required>
+                    <option selected>Pilih Jenis Kendaraan</option>
+                    <option value="angkutan">Angkutan Orang</option>
+                    <option value="barang">Angkutan Barang</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="fuel_consumption" class="form-label">Konsumsi BBM</label>
@@ -34,20 +37,11 @@
                 <input type="date" class="form-control" id="service_schedule" name="service_schedule" required>
             </div>
             <div class="mb-3">
-                <label for="driver" class="form-label">Nama Pengemudi</label>
-                <input type="text" class="form-control" id="driver" name="driver" required>
-            </div>
-            <div class="mb-3">
-                <label for="agreement" class="form-label">Nama Pihak Persetujuan</label>
-                <input type="text" class="form-control" id="agreement" name="agreement" required>
-            </div>
-            <div class="mb-3">
-                <label for="start_schedule" class="form-label">Awal Penggunaan</label>
-                <input type="date" class="form-control" id="start_schedule" name="start_date" required>
-            </div>
-            <div class="mb-3">
-                <label for="finish_schedule" class="form-label">Akhir Penggunaan</label>
-                <input type="date" class="form-control" id="finish_schedule" name="finish_date" required>
+                <select class="form-select" aria-label="Select vehicle ownership" name="vehicle_ownership_type" required>
+                    <option selected>Pilih Jenis Kepemilikan Kendaraan</option>
+                    <option value="perusahaan">Milik Perusahaan</option>
+                    <option value="sewa">Sewa</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Tambah</button>
         </form>

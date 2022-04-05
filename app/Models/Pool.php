@@ -16,11 +16,25 @@ class Pool extends Model
      */
     protected $fillable = [
         'vehicle_id',
+        'driver',
+        'agreement_id',
+        'start_date',
+        'finish_date',
         'status',
     ];
 
-    public function vehicles()
+    public function vehicle()
     {
-        return $this->hasMany('Vehicle');
+        return $this->belongsTo(Vehicle::class);
+    }
+
+    // public function vehicles()
+    // {
+    //     return $this->hasMany('Vehicle');
+    // }
+
+    public function agreement()
+    {
+        return $this->belongsTo(User::class);
     }
 }

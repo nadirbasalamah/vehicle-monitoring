@@ -16,6 +16,9 @@
     <div class="container">
         <h1>Daftar Pool</h1>
         <a href="{{ route('admin_index') }}" class="btn btn-primary">Kembali ke Dashboard</a>
+
+        <a href="{{ route('addPool') }}" class="btn btn-primary">Tambah Pemesanan Kendaraan</a>
+
         <div class="container">
             <table class="table table-hover">
                 <thead>
@@ -30,8 +33,8 @@
                 <tbody>
                     @foreach($pools as $pool)
                     <tr>
-                        <th scope="row">{{$pool->pool_id}}</th>
-                        <td>{{$pool->name}}</td>
+                        <th scope="row">{{$pool->id}}</th>
+                        <td>{{$pool->vehicle->name}}</td>
                         <td>{{$pool->start_date}}</td>
                         <td>{{$pool->finish_date}}</td>
                         <td>{{$pool->status}}</td>

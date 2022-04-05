@@ -23,8 +23,10 @@
                 <input type="text" class="form-control" id="vehicle_name" name="name" required value="{{ $v->name }}">
             </div>
             <div class="mb-3">
-                <label for="vehicle_type" class="form-label">Jenis Kendaraan</label>
-                <input type="text" class="form-control" id="vehicle_type" name="vehicle_type" required value="{{ $v->vehicle_type }}">
+                <select class="form-select" aria-label="Select vehicle ownership" name="vehicle_type" required>
+                    <option value="angkutan" @if ($v->vehicle_type == 'angkutan') selected="selected" @endif>Angkutan Orang</option>
+                    <option value="barang" @if ($v->vehicle_type == 'barang') selected="selected" @endif>Angkutan Barang</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="fuel_consumption" class="form-label">Konsumsi BBM</label>
@@ -34,22 +36,14 @@
                 <label for="service_schedule" class="form-label">Jadwal Service</label>
                 <input type="date" class="form-control" id="service_schedule" name="service_schedule" required value="{{ $v->service_schedule }}">
             </div>
+
             <div class="mb-3">
-                <label for="driver" class="form-label">Nama Pengemudi</label>
-                <input type="text" class="form-control" id="driver" name="driver" required value="{{ $v->driver }}">
+                <select class="form-select" aria-label="Select vehicle ownership" name="vehicle_ownership_type" required>
+                    <option value="perusahaan" @if ($v->vehicle_ownership_type == 'perusahaan') selected="selected" @endif>Milik Perusahaan</option>
+                    <option value="sewa" @if ($v->vehicle_ownership_type == 'sewa') selected="selected" @endif>Sewa</option>
+                </select>
             </div>
-            <div class="mb-3">
-                <label for="driver" class="form-label">Nama Pihak Persetujuan</label>
-                <input type="text" class="form-control" id="driver" name="agreement" required value="{{ $v->agreement }}">
-            </div>
-            <div class="mb-3">
-                <label for="start_schedule" class="form-label">Awal Penggunaan</label>
-                <input type="date" class="form-control" id="start_schedule" name="start_date" required value="{{ $v->start_date }}">
-            </div>
-            <div class="mb-3">
-                <label for="finish_schedule" class="form-label">Akhir Penggunaan</label>
-                <input type="date" class="form-control" id="finish_schedule" name="finish_date" required value="{{ $v->finish_date }}">
-            </div>
+
             <button type="submit" class="btn btn-primary">Ubah</button>
         </form>
         @endforeach

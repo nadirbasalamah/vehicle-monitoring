@@ -32,11 +32,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/add', [AdminController::class, 'addVehicle'])->name('addVehicle');
     Route::get('/monitoring', [AdminController::class, 'monitoringData'])->name('monitoringData');
     Route::get('/admin/pools', [AdminController::class, 'listPool'])->name('listPool');
+    Route::get('/add/pool', [AdminController::class, 'addPool'])->name('addPool');
 
     Route::post('/add', [AdminController::class, 'addNewVehicle'])->name('addNewVehicle');
     Route::post('/update/{id}', [AdminController::class, 'updateVehicle'])->name('updateVehicle');
     Route::post('/pool/{id}', [AdminController::class, 'addToPool'])->name('addToPool');
     Route::post('/export', [AdminController::class, 'exportToExcel'])->name('exportToExcel');
+    Route::post('/add/pool', [AdminController::class, 'createPool'])->name('createPool');
 
     // For Agreement Section
     Route::get('/agreement', [AgreementController::class, 'index'])->name('agreement_index');

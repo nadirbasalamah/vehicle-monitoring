@@ -23,9 +23,7 @@
                 <p class="card-text">Jenis Kendaraan: {{ $v->vehicle_type }}</p>
                 <p class="card-text">Konsumsi BBM: {{ $v->fuel_consumption }}</p>
                 <p class="card-text">Jadwal Service: {{ $v->service_schedule }}</p>
-                <p class="card-text">Nama Driver: {{ $v->driver }}</p>
-                <p class="card-text">Tanggal Mulai Penggunaan: {{ $v->start_date }}</p>
-                <p class="card-text">Tanggal Selesai Penggunaan: {{ $v->finish_date }}</p>
+                <p class="card-text">Jenis Kepemilikan Kendaraan: {{ $v->vehicle_ownership_type }}</p>
                 <a href="{{route('update', ['id' => $v->id])}}" class="btn btn-warning">Ubah</a>
                 @endforeach
                 <a href="{{ route('listVehicle') }}" class="btn btn-primary">Kembali ke Daftar Kendaraan</a>

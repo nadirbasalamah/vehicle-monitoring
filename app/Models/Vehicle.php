@@ -19,9 +19,6 @@ class Vehicle extends Model
         'vehicle_type',
         'fuel_consumption',
         'service_schedule',
-        'driver',
-        'agreement',
-        'start_date',
-        'finish_date'
+        'vehicle_ownership_type',
     ];
 }

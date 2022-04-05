@@ -19,10 +19,7 @@ class CreateVehiclesTable extends Migration
             $table->string('vehicle_type');
             $table->integer('fuel_consumption');
             $table->string('service_schedule');
-            $table->string('driver');
-            $table->string('agreement');
-            $table->string('start_date');
-            $table->string('finish_date');
+            $table->string('vehicle_ownership_type');
             $table->timestamps();
         });
     }
